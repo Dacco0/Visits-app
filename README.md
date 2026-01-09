@@ -68,7 +68,7 @@ public/
 
 ### 1. Clonar el repositorio
 ```bash
-git clone <repo-url>
+git clone https://github.com/Dacco0/Visits-app.git
 cd visits-app
 ```
 
