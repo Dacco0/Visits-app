@@ -26,7 +26,18 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"email\": \"admin@test.com\",\r\n  \"password\": \"password123\"\r\n}",
@@ -55,6 +66,55 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/visits",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"visits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/visits/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"visits",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
@@ -65,17 +125,22 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n  \"name\": \"Juan Pérez\",\r\n  \"email\": \"juan@test.com\",\r\n  \"latitude\": 4.6097,\r\n  \"longitude\": -74.0817\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,22 +161,6 @@
 			"response": []
 		},
 		{
-			"name": "Show",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "Create",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
 			"name": "Update",
 			"request": {
 				"auth": {
@@ -128,6 +177,11 @@
 				"header": [
 					{
 						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
 					}
