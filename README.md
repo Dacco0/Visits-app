@@ -3,6 +3,8 @@
 Este proyecto es una aplicación web desarrollada como prueba técnica para **Bex Soluciones**.  
 Permite registrar y visualizar visitas geolocalizadas mediante una API REST construida con Laravel y una interfaz frontend con Vue 3 y Leaflet.
 
+> **Nota importante:** Este proyecto fue desarrollado utilizando **Laragon** como entorno de desarrollo local. Las URLs proporcionadas por Laragon siguen el formato `http://visits-app.test/`.
+
 ---
 
 ## 🛠️ Stack tecnológico
@@ -90,7 +92,35 @@ Edita el archivo `.env` y configura tu conexión a la base de datos.
 php artisan migrate
 ```
 
-### 5. Instalar dependencias frontend
+### 5. Crear usuario administrador
+
+Es necesario crear un usuario administrador para poder autenticarse en la API. Utiliza Laravel Tinker para crear el usuario:
+
+```bash
+php artisan tinker
+```
+
+Una vez dentro de Tinker, ejecuta el siguiente código para crear el usuario admin:
+
+```php
+\App\Models\User::create([
+    'name' => 'Admin',
+    'email' => 'admin@test.com',
+    'password' => \Illuminate\Support\Facades\Hash::make('password123')
+]);
+```
+
+**JSON para Postman (Login):**
+```json
+{
+  "email": "admin@test.com",
+  "password": "password123"
+}
+```
+
+Sal de Tinker escribiendo `exit` o presionando `Ctrl+C`.
+
+### 6. Instalar dependencias frontend
 ```bash
 npm install
 npm run dev
@@ -134,9 +164,13 @@ Los endpoints marcados con ✅ requieren autenticación mediante token Bearer.
 Incluí una colección de Postman lista para usar en la carpeta `postman/`. Para usarla:
 
 1. Abre Postman e importa el archivo `Visits API.postman_collection.json`
-2. Configura la variable `base_url` en la colección (ej: `http://localhost` o `http://tu-dominio.local`)
+2. **Configura la variable `base_url` en la colección con la URL de Laragon:**
+   - Si estás usando Laragon, la URL base será: `http://visits-app.test`
+   - Configura esta variable en la colección de Postman (Variables → base_url)
 3. Ejecuta el request "Authentication Login" primero - automáticamente guarda el token en una variable
 4. Ya puedes probar los demás endpoints, los que requieren auth usan el token automáticamente
+
+**Importante:** Asegúrate de haber creado el usuario administrador con Tinker antes de intentar hacer login (ver sección "Crear usuario administrador").
 
 La colección incluye todos los endpoints principales y el script de login guarda el token para que no tengas que copiarlo manualmente.
 
